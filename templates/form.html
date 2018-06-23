@@ -1,0 +1,221 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Text Analysis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/spinner.css' %}"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+            integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <br>
+    <h2 class="aligned">Give voice to your text by using the power of Google's Text-to-Speech API: </h2>
+    <form id="fileForm" class="form-horizontal" action="{% url 'home' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-row">
+            <br/>
+            <div class="form-group">
+                <label for="textFile">Text File: </label>
+                <br/>
+                <input type="file" name="textFile" id="textFile">
+            </div>
+        </div>
+        <div class="form-row">
+            <br/>
+            <div class="form-group">
+                <label for="gender">Voice Gender</label>
+                <select class="form-control" name="gender" id="gender">
+                    <option value="SSML_VOICE_GENDER_UNSPECIFIED">UNSPECIFIED</option>
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                    <option value="NEUTRAL">NEUTRAL</option>
+                </select>
+            </div>
+            <div class="form-group" style="margin-left: 5%">
+                <label for="voice_type">Voice Type:</label>
+                <select class="form-control" id="voice_type" name="voice_type">
+                    <option value="nl-NL-Standard-A">nl-NL-Standard-A</option>
+                    <option value="en-AU-Standard-A">en-AU-Standard-A</option>
+                    <option value="en-AU-Standard-B">en-AU-Standard-B</option>
+                    <option value="en-AU-Standard-C">en-AU-Standard-C</option>
+                    <option value="en-AU-Standard-D">en-AU-Standard-D</option>
+                    <option value="en-GB-Standard-A">en-GB-Standard-A</option>
+                    <option value="en-GB-Standard-B">en-GB-Standard-B</option>
+                    <option value="en-GB-Standard-C">en-GB-Standard-C</option>
+                    <option value="en-GB-Standard-D">en-GB-Standard-D</option>
+                    <option value="en-US-Wavenet-A">en-US-Wavenet-A</option>
+                    <option value="en-US-Wavenet-B">en-US-Wavenet-B</option>
+                    <option value="en-US-Wavenet-C">en-US-Wavenet-C</option>
+                    <option value="en-US-Wavenet-D">en-US-Wavenet-D</option>
+                    <option value="en-US-Wavenet-E">en-US-Wavenet-E</option>
+                    <option value="en-US-Wavenet-F">en-US-Wavenet-F</option>
+                    <option value="en-US-Standard-B">en-US-Standard-B</option>
+                    <option value="en-US-Standard-C">en-US-Standard-C</option>
+                    <option value="en-US-Standard-D">en-US-Standard-D</option>
+                    <option value="en-US-Standard-E">en-US-Standard-E</option>
+                    <option value="fr-FR-Standard-C">fr-FR-Standard-C</option>
+                    <option value="fr-FR-Standard-D">fr-FR-Standard-D</option>
+                    <option value="fr-CA-Standard-A">fr-CA-Standard-A</option>
+                    <option value="fr-CA-Standard-B">fr-CA-Standard-B</option>
+                    <option value="fr-CA-Standard-C">fr-CA-Standard-C</option>
+                    <option value="fr-CA-Standard-D">fr-CA-Standard-D</option>
+                    <option value="de-DE-Standard-A">de-DE-Standard-A</option>
+                    <option value="de-DE-Standard-B">de-DE-Standard-B</option>
+                    <option value="it-IT-Standard-A">it-IT-Standard-A</option>
+                    <option value="ja-JP-Standard-A">ja-JP-Standard-A</option>
+                    <option value="ko-KR-Standard-A">ko-KR-Standard-A</option>
+                    <option value="pt-BR-Standard-A">pt-BR-Standard-A</option>
+                    <option value="es-ES-Standard-A">es-ES-Standard-A</option>
+                    <option value="sv-SE-Standard-A">sv-SE-Standard-A</option>
+                    <option value="tr-TR-Standard-A">tr-TR-Standard-A</option>
+                </select>
+            </div>
+            <div class="form-group" style="margin-left: 5%">
+                <label for="pitch">Pitch Range: </label>
+                <select name="pitch" class="form-control" title="" required="" id="id_pitch">
+                    <option value="" selected="">---------</option>
+
+                    <option value="-20">-20</option>
+
+                    <option value="-19">-19</option>
+
+                    <option value="-18">-18</option>
+
+                    <option value="-17">-17</option>
+
+                    <option value="-16">-16</option>
+
+                    <option value="-15">-15</option>
+
+                    <option value="-14">-14</option>
+
+                    <option value="-13">-13</option>
+
+                    <option value="-12">-12</option>
+
+                    <option value="-11">-11</option>
+
+                    <option value="-10">-10</option>
+
+                    <option value="-09">-09</option>
+
+                    <option value="-08">-08</option>
+
+                    <option value="-07">-07</option>
+
+                    <option value="-06">-06</option>
+
+                    <option value="-05">-05</option>
+
+                    <option value="-04">-04</option>
+
+                    <option value="-03">-03</option>
+
+                    <option value="-02">-02</option>
+
+                    <option value="-01">-01</option>
+
+                    <option value="1">1</option>
+
+                    <option value="2">2</option>
+
+                    <option value="3">3</option>
+
+                    <option value="4">4</option>
+
+                    <option value="5">5</option>
+
+                    <option value="6">6</option>
+
+                    <option value="7">7</option>
+
+                    <option value="8">8</option>
+
+                    <option value="9">9</option>
+
+                    <option value="10">10</option>
+
+                    <option value="11">11</option>
+
+                    <option value="12">12</option>
+
+                    <option value="13">13</option>
+
+                    <option value="14">14</option>
+
+                    <option value="15">15</option>
+
+                    <option value="16">16</option>
+
+                    <option value="17">17</option>
+
+                    <option value="18">18</option>
+
+                    <option value="19">19</option>
+
+                    <option value="20">20</option>
+                </select>
+            </div>
+            <div class="form-group" style="margin-left: 5%">
+                <label for="speed">Speed Range: </label>
+                <select name="speed" class="form-control" title="" required="" id="id_speed">
+                    <option value="" selected="">---------</option>
+
+                    <option value="0.25">0.25</option>
+
+                    <option value="0.50">0.50</option>
+
+                    <option value="0.75">0.75</option>
+
+                    <option value="1">1</option>
+
+                    <option value="1.25">1.25</option>
+
+                    <option value="1.50">1.50</option>
+
+                    <option value="1.75">1.55</option>
+
+                    <option value="2">2</option>
+
+                    <option value="2.25">2.25</option>
+
+                    <option value="2.50">2.50</option>
+
+                    <option value="2.45">2.75</option>
+
+                    <option value="3">3</option>
+
+                    <option value="3.25">3.25</option>
+
+                    <option value="3.50">3.50</option>
+
+                    <option value="3.75">3.75</option>
+
+                    <option value="4">4</option>
+
+                </select>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-lg btn-primary">Generate Audio</button>
+    </form>
+    <br/>
+    <div class="alert alert-success" id="success" role="alert" hidden>
+        Your voice has been generated successfully!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+</body>
+</html>

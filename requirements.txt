@@ -1,0 +1,14 @@
+Django==1.11.1
+google-api-core==0.1.4
+google-api-python-client==1.6.4
+google-auth==1.4.1
+google-auth-httplib2==0.0.2
+google-cloud==0.30.0
+google-cloud-core==0.28.0
+google-cloud-error-reporting==0.28.0
+google-cloud-resource-manager==0.28.0
+google-cloud-runtimeconfig==0.28.0
+google-cloud-speech==0.30.0
+google-cloud-texttospeech==0.1.0
+google-cloud-texttospeech
+django-bootstrap4
